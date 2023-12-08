@@ -38,21 +38,21 @@ def get_track_details(track_id, token):
     return image_url
 
 # Your Spotify API Credentials
-client_id = 'your_client_id'
-client_secret = 'your_client_secret'
+client_id = 'd8f38dcfbc134c86a95185c10f247c6e'
+client_secret = 'c565a2a708064407bdc078730fe12e08'
 
 # Get Access Token
 access_token = get_spotify_token(client_id, client_secret)
 
 # Read your DataFrame (replace 'your_file.csv' with the path to your CSV file)
-df_spotify = pd.read_csv('your_file.csv', encoding='ISO-8859-1')
+df_spotify = pd.read_csv('spotify-2023.csv', encoding='ISO-8859-1')
 
 # Loop through each row to get track details and add to DataFrame
 for i, row in df_spotify.iterrows():
-    track_id = search_track(row['track_name'], row['artist_name'], access_token)
+    track_id = search_track(row['track_name'], row['artist(s)_name'], access_token)
     if track_id:
         image_url = get_track_details(track_id, access_token)
         df_spotify.at[i, 'image_url'] = image_url
 
 # Save the updated DataFrame (replace 'updated_file.csv' with your desired output file name)
-df_spotify.to_csv('updated_file.csv', index=False)
+df_spotify.to_csv('updated_spotify.csv', index=False)
